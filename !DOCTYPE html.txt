@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Bizim Clash Royale'imiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <div class="elixir-container">
+            <div id="elixir-bar"></div>
+            <span id="elixir-count">0</span>
+        </div>
+
+        <div id="battle-field">
+            <img src="sandik.png" id="main-chest" onclick="openChest()">
+            <p id="status-text">Sandığa tıkla ve sürprizi gör!</p>
+        </div>
+
+        <div class="deck">
+            <div class="card" onclick="playCard('Seni Seviyorum Kartı', 3)">İrem</div>
+            <div class="card" onclick="playCard('Huzur Kartı', 5)">Sevgilim</div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+let elixir = 0;
+const elixirBar = document.getElementById('elixir-bar');
+const elixirCount = document.getElementById('elixir-count');
+
+// Her 1.5 saniyede 1 iksir artsın
+setInterval(() => {
+    if (elixir < 10) {
+        elixir++;
+        elixirCount.innerText = elixir;
+        elixirBar.style.width = (elixir * 10) + "%";
+    }
+}, 1500);
+
+function playCard(name, cost) {
+    if (elixir >= cost) {
+        elixir -= cost;
+        alert(name + " sahaya sürüldü! Seni çok seviyor!");
+    } else {
+        alert("Yetersiz iksir! Biraz bekle.");
+    }
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Sana Özel Clash Royale!</title>
+    <style>
+        /* TÜM GÖRÜNÜM AYARLARI BURADA */
+        body { background: #1a1a1a; display: flex; flex-direction: column; align-items: center; font-family: 'Arial', sans-serif; color: white; margin: 0; overflow: hidden; }
+        .arena { width: 350px; height: 500px; background: #3d7a3d; border: 8px solid #555; border-radius: 20px; position: relative; margin-top: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .elixir-bar { width: 300px; height: 25px; background: #333; border: 3px solid #eee; border-radius: 15px; margin-top: 20px; position: relative; }
+        #fill { height: 100%; width: 0%; background: linear-gradient(to right, #a29bfe, #6c5ce7); border-radius: 10px; transition: width 0.1s; }
+        .deck { display: flex; gap: 10px; margin-top: 20px; }
+        .card { width: 80px; height: 110px; background: #f1c40f; border-radius: 10px; cursor: pointer; color: #2d3436; font-weight: bold; display: flex; align-items: center; justify-content: center; text-align: center; border: 3px solid white; transition: transform 0.2s; }
+        .card:hover { transform: scale(1.1); }
+        #message { position: absolute; top: 40%; width: 100%; text-align: center; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 5px black; }
+    </style>
+</head>
+<body>
+
+    <h2 style="color: #f1c40f;">⚔️ Aşk Arenası ⚔️</h2>
+
+    <div class="arena">
+        <div id="message">Sandığı Bekle...</div>
+        </div>
+
+    <div class="elixir-bar">
+        <div id="fill"></div>
+    </div>
+    <p>İksir: <span id="val">0</span>/10</p>
+
+    <div class="deck">
+        <div class="card" onclick="atKart('Seni Seviyorum!', 3)">❤️<br>Aşk Atışı<br>(3 İksir)</div>
+        <div class="card" onclick="atKart('Harika Bir Gün!', 5)">🌟<br>Mutluluk<br>(5 İksir)</div>
+        <div class="card" onclick="atKart('Birlikte Kahve?', 2)">☕<br>Mola<br>(2 İksir)</div>
+    </div>
+
+    <script>
+        // TÜM OYUN MANTIĞI BURADA
+        let iksir = 0;
+        const bar = document.getElementById('fill');
+        const count = document.getElementById('val');
+        const msg = document.getElementById('message');
+
+        // İksiri otomatik doldur
+        setInterval(() => {
+            if (iksir < 10) {
+                iksir += 0.1; // Yavaşça dolsun
+                count.innerText = Math.floor(iksir);
+                bar.style.width = (iksir * 10) + "%";
+            }
+        }, 100);
+
+        function atKart(metin, bedel) {
+            if (iksir >= bedel) {
+                iksir -= bedel;
+                msg.innerText = metin;
+                msg.style.color = "#fff";
+                // Ekranda efekt yapalım
+                msg.animate([{transform: 'scale(0.5)'}, {transform: 'scale(1.2)'}], {duration: 300});
+            } else {
+                msg.innerText = "Yetersiz İksir! ❌";
+                msg.style.color = "red";
+            }
+        }
+    </script>
+</body>
+</html>
